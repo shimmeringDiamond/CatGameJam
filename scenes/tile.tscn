@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://yhxulv8fwk1"]
+
+[ext_resource type="Texture2D" uid="uid://cgwcbddcaljjx" path="res://textueres/test/forest_leaves_02_4k.blend/textures/forest_leaves_02_diffuse_4k.jpg" id="1_qv0gj"]
+[ext_resource type="Texture2D" uid="uid://dm8sbqy6bp8ih" path="res://textueres/test/forest_leaves_02_4k.blend/textures/forest_leaves_02_disp_4k.png" id="2_i6mt7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekjou"]
+albedo_texture = ExtResource("1_qv0gj")
+normal_texture = ExtResource("2_i6mt7")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jvbeu"]
+material = SubResource("StandardMaterial3D_ekjou")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xq8cc"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="tile" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("PlaneMesh_jvbeu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_xq8cc")
