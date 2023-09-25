@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://yhxulv8fwk1"]
+
+[ext_resource type="Material" uid="uid://ciiuajcm7wm56" path="res://textueres/test/forest_leaves_02_4k.blend/textures/placeholder grass.tres" id="1_wie2o"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jvbeu"]
+material = ExtResource("1_wie2o")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xq8cc"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xtpxh"]
+material = ExtResource("1_wie2o")
+
+[sub_resource type="BoxMesh" id="BoxMesh_weid2"]
+
+[node name="tiles" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_jvbeu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_xq8cc")
+
+[node name="blueLaserPointer" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4.295)
+mesh = SubResource("PlaneMesh_xtpxh")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="blueLaserPointer"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="blueLaserPointer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_weid2")
